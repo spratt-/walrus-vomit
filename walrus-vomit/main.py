@@ -34,12 +34,14 @@ class AdviceHandler(webapp2.RequestHandler):
         advice_results = advice_query.fetch()
         advice_result = advice_results[0]
 
-        data = {}
-        data['content'] = advice_result.content
-        data['source'] = advice_result.source
+        data = {
+            'content':advice_result.content,
+            'source': advice_result.source
+        }
         self.response.write(template.render(data))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/advice', AdviceHandler)
+
 ], debug=True)
